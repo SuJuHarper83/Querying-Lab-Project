@@ -148,12 +148,11 @@ def problem_three(request):
 
   instructor = Instructor.objects.get(pk = 2)
   courses = Course.objects.filter(instructor_id = 2)
-
   
   print(f"First Name: {instructor.first_name} {instructor.last_name}")
   print(f"Courses:")
+
   for course in courses:
-    
     print(f'--{course.name}')
 
   return complete(request)
@@ -203,21 +202,15 @@ SELECT `school_db_instructor`.`id`,
 def problem_four(request):
 
   students = Student.objects.count()
-
-  for student in students:
-    print(f"Student count: {students.id}")
+  print(f"Students count: {students}")
 
   courses = Course.objects.count()
-
-  for course in courses:
-    print(f"Courses count: {courses.id}")
+  print(f"Courses count: {courses}")
 
   instructors = Instructor.objects.count()
+  print(f"Instructors count: {instructors}")
 
-  for instructor in instructors:
-    print(f"Instructor count: {instructors.id}")
-
-    return complete(request)
+  return complete(request)
 
 
 # Supporting Query Method Documentation:
@@ -263,13 +256,12 @@ def problem_five(request):
 
   student = Student.objects.create(first_name="Rose", last_name="Akina", year=2021, gpa=3.6)
 
-  for student in student:
-    print(f"ID: {student.id}")
-    print(f"Full Name: {student.first_name}, {student.last_name}")
-    print(f"Year: {student.year}")
-    print(f"GPA: {student.gpa}")
+  print(f"ID: {student.id}")
+  print(f"Full Name: {student.first_name}, {student.last_name}")
+  print(f"Year: {student.year}")
+  print(f"GPA: {student.gpa}")
 
-    return complete(request)
+  return complete(request)
 
 
 # Supporting Query Method Documentation:
@@ -302,14 +294,14 @@ VALUES ('Kyle', 'Harwood', 2022, 3.0)
 def problem_six(request):
     
     # Make sure to set this equal to the primary key of the row you just created!
-    student_id = 11
+    student_id = 15
 
-    students = Student.objects.filter(pk = 11).update(gpa=3.7)
+    student = Student.objects.filter(pk=15).update(gpa=3.7)
+    student = Student.objects.get(pk=student_id)
 
-    for student in students:
-      print(f"ID: {student.id}")
-      print(f"Full Name: {student.first_name} {student.last_name}")
-      print(f"GPA: {student.gpa}")
+    print(f"ID: {student.id}")
+    print(f"Full Name: {student.first_name} {student.last_name}")
+    print(f"GPA: {student.gpa}")
 
     return complete(request)
 
@@ -356,9 +348,9 @@ LIMIT 21
 def problem_seven(request):
 
     # Make sure to set this equal to the primary key of the row you just created!
-    student_id = 11
+    student_id = 14
 
-    student = Student.objects.filter(pk = 11).delete()
+    student = Student.objects.filter(pk=14).delete()
 
     try:
         student = Student.objects.get(pk=student_id)
