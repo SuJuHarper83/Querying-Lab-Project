@@ -58,7 +58,7 @@ SELECT `school_db_student`.`id`,
 # Print out each student's full name and gpa to the terminal
 def problem_one(request):
 
-  students = Student.objects.filter(gpa__gt=3.0).order_by('-gpa')
+  students = Student.objects.filter(gpa__gt = 3.0).order_by('-gpa')
 
   for student in students:
     print(f"Full Name: {student.first_name} {student.last_name} GPA:{student.gpa}")
@@ -153,7 +153,7 @@ def problem_three(request):
   print(f"Courses:")
 
   for course in courses:
-    print(f'--{course.name}')
+    print(f' - {course.name}')
 
   return complete(request)
 
@@ -254,7 +254,7 @@ SELECT COUNT(*) AS `__count`
 # NOTE every time you execute this function a duplicate student will be created with a different primary key number
 def problem_five(request):
 
-  student = Student.objects.create(first_name="Rose", last_name="Akina", year=2021, gpa=3.6)
+  student = Student.objects.create(first_name="Rose", last_name="Akina", year = 2021, gpa = 3.6)
 
   print(f"ID: {student.id}")
   print(f"Full Name: {student.first_name}, {student.last_name}")
@@ -294,10 +294,10 @@ VALUES ('Kyle', 'Harwood', 2022, 3.0)
 def problem_six(request):
     
     # Make sure to set this equal to the primary key of the row you just created!
-    student_id = 15
+    student_id = 16
 
-    student = Student.objects.filter(pk=15).update(gpa=3.7)
-    student = Student.objects.get(pk=student_id)
+    student = Student.objects.filter(pk = 16).update(gpa = 3.7)
+    student = Student.objects.get(pk = student_id)
 
     print(f"ID: {student.id}")
     print(f"Full Name: {student.first_name} {student.last_name}")
@@ -350,10 +350,10 @@ def problem_seven(request):
     # Make sure to set this equal to the primary key of the row you just created!
     student_id = 14
 
-    student = Student.objects.filter(pk=14).delete()
+    student = Student.objects.filter(pk = 14).delete()
 
     try:
-        student = Student.objects.get(pk=student_id)
+        student = Student.objects.get(pk = student_id)
     except ObjectDoesNotExist:
         print('Great! It failed and couldnt find the object because we deleted it!')
 
@@ -409,9 +409,11 @@ SELECT `school_db_student`.`id`,
 def bonus_problem(request):
 
   instructors = Instructor.objects.annotate(course_count=Count('course'))
+
   for instructor in instructors:
     if instructor.course_count == 1:
       print(f'Name: {instructor.first_name} Course Count: {instructor.course_count}')
+      
   return complete(request)
 
 
